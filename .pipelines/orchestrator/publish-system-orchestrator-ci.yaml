@@ -1,0 +1,26 @@
+trigger: none
+
+variables:
+- name: workingDirectory
+  value: '$(Build.SourcesDirectory)/src'
+- name: coverageRootPath
+  value: '${{ variables.workingDirectory }}/coverage'
+- name: vmImage
+  value: 'ubuntu-18.04'
+
+stages:
+- stage: 'BuildTest'
+  displayName: 'Build & Test'
+  jobs:
+  - job: BuildTest  
+    displayName: 'Build & deploy'
+    pool:
+      name: Default
+      vmImage: '${{ variables.vmImage }}'      
+    steps:
+    - template: '/.pipelines/.templates/dotnetcore-build.yaml'
+      parameters:
+          workingDirectory: '${{ variables.workingDirectory }}'
+          solution: '${{ variables.workingDirectory }}/**/*.csproj'
+          testProject: '${{ variables.workingDirectory }}/**/*.Test.csproj'
+          coverageRootPath: '${{ variables.coverageRootPath }}'

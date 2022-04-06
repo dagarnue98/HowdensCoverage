@@ -1,0 +1,14 @@
+<Project>
+	<ItemGroup Condition=" '$(Configuration)' == 'Debug'">
+		<PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopAnalyzers)">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="StyleCop.Analyzers.Unstable" Version="$(StyleCopAnalyzersUnstable)">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<Import Project="external-dependencies.props"/>
+	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)build\PublishSystem.ruleset"/>
+	</ItemGroup>
+</Project>

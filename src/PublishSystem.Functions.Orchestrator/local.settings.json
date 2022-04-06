@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "SBConnectionString": "Endpoint=sb://sb-publishsystem-dev-001.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=dtpgZ/e+lZsqzal0+3UQpQWocPvcTNYnkqDdfx4jrP0=",
+    "DBConnectionString": "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=PublishSystem;Integrated Security=SSPI;",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  }
+}

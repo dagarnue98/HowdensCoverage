@@ -1,0 +1,25 @@
+<Project>
+	<PropertyGroup Label="PublishSystem">	
+		<AutoMapper>11.0.1</AutoMapper>
+		<AutoMapperExtensionsMicrosoftDependencyInjection>11.0.0</AutoMapperExtensionsMicrosoftDependencyInjection>
+		<AzureMessagingServiceBus>7.7.0</AzureMessagingServiceBus>
+		<MicrosoftApplicationInsightsAspNetCore>2.20.0</MicrosoftApplicationInsightsAspNetCore>
+		<MicrosoftAspNetCoreMvcAbstractions>2.2.0</MicrosoftAspNetCoreMvcAbstractions>
+		<MicrosoftAspNetCoreMvcCore>2.2.5</MicrosoftAspNetCoreMvcCore>
+		<MicrosoftEntityFrameworkCore>6.0.2</MicrosoftEntityFrameworkCore>
+		<MicrosoftEntityFrameworkCoreSqlServer>6.0.2</MicrosoftEntityFrameworkCoreSqlServer>
+		<MicrosoftExtensionsAzure>1.1.1</MicrosoftExtensionsAzure>
+		<MicrosoftExtensionsDependencyInjectionAbstractions>6.0.0</MicrosoftExtensionsDependencyInjectionAbstractions>
+		<MicrosoftExtensionsLoggingAbstractions>6.0.0</MicrosoftExtensionsLoggingAbstractions>
+		<MicrosoftExtensionsOptions>6.0.0</MicrosoftExtensionsOptions>
+		<PublishSystemCoreCommon>1.0.0</PublishSystemCoreCommon>
+		<Serilog>2.10.0</Serilog>
+		<SerilogExtensionsLogging>3.1.0</SerilogExtensionsLogging>
+		<SerilogSinksApplicationInsights>3.1.0</SerilogSinksApplicationInsights>
+		<SerilogSinksConsole>4.0.1</SerilogSinksConsole>
+		<SerilogSinksMSSqlServer>5.7.0</SerilogSinksMSSqlServer>
+		<stateless>5.11.0</stateless>
+		<StyleCopAnalyzers>1.1.118</StyleCopAnalyzers>
+		<StyleCopAnalyzersUnstable>1.2.0.406</StyleCopAnalyzersUnstable>
+	</PropertyGroup>
+</Project>

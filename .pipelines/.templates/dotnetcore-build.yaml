@@ -1,0 +1,84 @@
+parameters:
+    buildConfiguration: 'Release'
+    solution: '**/*.csproj'
+    testProject: '**/*[Tt]est*/*.csproj'
+    workingDirectory: 'src'
+    dotnetCustomArguments: ''
+    coverageRootPath: './coverage'
+    netVersion: '6.x'
+    vstsFeed: '02ddf3f6-d1ed-4565-bc40-0773ac51d757'
+    NUGET_PACKAGES: ''
+ 
+steps:
+
+- task: NuGetToolInstaller@1
+  displayName: 'NuGet tool installer'
+
+- task: UseDotNet@2 
+  displayName: ".NET Core ${{ parameters.netVersion }}"
+  inputs:
+    version: '${{ parameters.netVersion }}'
+    packageType: sdk
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: DotNetCoreCLI@2
+  displayName: 'Install ReportGenerator'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install --global dotnet-reportgenerator-globaltool'    
+
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet - Restore'
+  inputs:
+    command: 'restore'
+    projects: '${{ parameters.solution }}'  
+    feedsToUse: 'select'
+    vstsFeed: '${{ parameters.vstsFeed }}'
+
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet - Add Coverlet.MsBuild'
+  inputs:
+    command: 'custom'
+    custom: 'add'
+    projects: '${{ parameters.testProject }}'
+    arguments: 'package coverlet.msbuild'       
+    
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet - Build'
+  inputs:
+    command: 'build'
+    projects: '${{ parameters.solution }}'
+    arguments: '-c ${{ parameters.buildConfiguration }} ${{ parameters.dotnetCustomArguments }}'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test - Execute'    
+  inputs:
+    command: test
+    projects: '${{ parameters.testProject }}'
+    publishTestResults: true
+    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\"" /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.json" "/p:Exclude=\"[*.Test]*,[xunit.*]*,[*]System.*\""'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Test - Publish coverage report'
+  inputs:
+    codeCoverageTool: cobertura
+    summaryFileLocation: $(coverageRootPath)/**/*.xml
+    reportDirectory: $(coverageRootPath)/Reports
+    failIfCoverageEmpty: false
+
+- task: PowerShell@2
+  displayName: 'Check if Coverage its >30% if not , failed Pipeline'
+  inputs:
+    targetType: 'inline'
+    script: |
+      [XML]$report= Get-Content $(coverageRootPath)/coverage.cobertura.xml
+            
+              if ($report.coverage.'line-rate' -lt 0.3) {
+                Write-Host "Coverage is less than 30 percent , the pipeline will fail"
+                $coverageFail= $true
+                exit 1
+              }
+              else {
+                Write-Host "Coverage is more than 30 percent , the pipeline will not fail"
+                $coverageFail=$false}    

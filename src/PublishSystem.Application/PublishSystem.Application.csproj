@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\PublishRequestServi\**" />
+    <EmbeddedResource Remove="Services\PublishRequestServi\**" />
+    <None Remove="Services\PublishRequestServi\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Handlebars.Net" Version="2.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="$(MicrosoftApplicationInsightsAspNetCore)" />
+    <PackageReference Include="Serilog" Version="$(Serilog)" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="$(SerilogExtensionsLogging)" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="$(SerilogSinksApplicationInsights)" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="$(SerilogSinksConsole)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="$(AutoMapper)" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="$(AutoMapperExtensionsMicrosoftDependencyInjection)" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="$(SerilogSinksMSSqlServer)" />
+    <PackageReference Include="stateless" Version="$(stateless)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="$(MicrosoftAspNetCoreMvcAbstractions)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="$(MicrosoftAspNetCoreMvcCore)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PublishSystem.Domain\PublishSystem.Domain.csproj" />
+    <ProjectReference Include="..\PublishSystem.Integration.Messaging\PublishSystem.Integration.Messaging.csproj" />
+    <ProjectReference Include="..\PublishSystem.Integration.Rendering\PublishSystem.Integration.Rendering.csproj" />
+  </ItemGroup>  
+
+</Project>

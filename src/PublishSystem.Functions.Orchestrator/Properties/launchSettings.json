@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "PublishSystem.Functions.Orchestrator": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 34953,
+      "useSSL": false
+    }
+  }
+}
